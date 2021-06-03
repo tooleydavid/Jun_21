@@ -14,7 +14,7 @@ public class Assignment2 {
 	 */
 	public static void main(String[] args) {
 		//Gets a random number between 1-100
-		int answer = (int)(Math.random()*99+1);		
+		int answer = (int)(Math.random()*100+1);		
 		Scanner scan = new Scanner(System.in);
 		//Gives user 5 attempts to guess or if they guess it
 		int numGuesses = 5;
