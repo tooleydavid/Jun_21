@@ -65,7 +65,7 @@ public class D3_Assignment2 {
 	 * Checks to make sure the file name ends in .txt
 	 * @param fileName
 	 * @param scan
-	 * @return returns the new or unchanged filename
+	 * @return returns the new or unchanged filename 
 	 */
 	public static String checkFileName(String fileName, Scanner scan)
 	{

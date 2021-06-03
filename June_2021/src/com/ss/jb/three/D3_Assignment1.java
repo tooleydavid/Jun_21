@@ -64,7 +64,7 @@ public class D3_Assignment1 {
 				}catch(NullPointerException f) {
 
 				}
-			}
+			} 
 			
 			
 			if(filesList.length==0)// checks for empty directories just to give some kind of output
