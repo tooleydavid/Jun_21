@@ -20,7 +20,7 @@ public class D2_Assignment1 {
 				strs.add(arg);
 			}
 		}
-		System.out.println("Sum of all numbers: "+total);//wasn't sure if I should do something if the total becomes to large and overflows
+		System.out.println("Sum of all numbers: "+total);//I wasn't sure if I should do something if the total becomes too large and overflows
 		System.out.println("All remaining Strings: ");
 		for(String str : strs)
 		{
