@@ -1,0 +1,32 @@
+David Tooley
+
+1.	 Which class would you use to store your birthday in years, months, days, seconds, and nanoseconds?
+
+LocalDateTime class can be used to store time in year, month, day, hour, minute, second format. Time is represented to nanosecond precision.
+
+
+
+2.	 Given a random date, how would you find the date of the previous Thursday?
+
+You can use the "previous" method from the TemporalAdjuster class to find the previous given day of the week
+
+3.	 What is the difference between a ZoneId and a ZoneOffset?
+
+ZoneId represent different time zones while ZoneOffset is used to calculate the difference in time from different time zones
+
+
+4.	 How would you convert an Instant to a ZonedDateTime? How would you convert a ZonedDateTime to an Instant?
+
+You can use .ofInstant on a ZonedDateTime to convert it to an instant, you can also use .atZone to convert an intant to a ZonedDateTime
+
+    
+
+
+all code can be found in com.ss.jb.five Dates.java
+5.	 Write an example that, for a given year, reports the length of each month within that year.
+
+
+
+6.	 Write an example that, for a given month of the current year, lists all of the Mondays in that month.
+
+7.	 Write an example that tests whether a given date occurs on Friday the 13th.

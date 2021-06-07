@@ -1,18 +1,23 @@
 package com.ss.jb.wk1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+@FunctionalInterface
+interface FunctionalInt{
+	Integer[] doMath(Integer[] arr);
+}
+
+interface FunctionalStr{
+	String[] doMath(String[] arr);
+}
 
 public class Wk1_Assignment2 {
 	
 
 	public static void main(String[] args)
 	{
-		List<Integer> arr = Arrays.asList(16, 8, 886, 8, 1);
-		FunctionalInt func = rightDigit();
-		//FunctionalInt func = doubling();
-		List<Integer> result = func.doMath(arr);
+		Integer[] arr = new Integer[] {6,8,6,8,-1};
+		//FunctionalInt func = rightDigit();
+		FunctionalInt func = doubling();
+		Integer[] result = func.doMath(arr);
 		
 		for(Integer num: result)
 		{
@@ -20,9 +25,9 @@ public class Wk1_Assignment2 {
 		}
 		
 		
-		List<String> arr2 = Arrays.asList("xxax", "xbxbx", "xxcx" );
+		String[] arr2 = new String[] {"xxax", "xbxbx", "xxcx" };
 		FunctionalStr func2 = noX();
-		List<String> result2 = func2.doMath(arr2);
+		String[] result2 = func2.doMath(arr2);
 		
 		for(String str: result2)
 		{
@@ -36,10 +41,10 @@ public class Wk1_Assignment2 {
 	 */
 	public static FunctionalInt rightDigit() {
 		return (a-> {
-			List<Integer> temp = new ArrayList<>(a.size());
-			for(int i = 0; i < a.size(); i++)
+			Integer[] temp = new Integer[a.length];
+			for(int i = 0; i < a.length; i++)
 			{
-				temp.add(a.get(i)%10);
+				temp[i] = a[i]%10;
 			}
 			return temp;
 			});
@@ -52,10 +57,10 @@ public class Wk1_Assignment2 {
 	 */
 	public static FunctionalInt doubling() {
 		return (a-> {
-			List<Integer> temp = new ArrayList<>(a.size());
-			for(int i = 0; i < a.size(); i++)
+			Integer[] temp = new Integer[a.length];
+			for(int i = 0; i < a.length; i++)
 			{
-				temp.add(a.get(i)*2);
+				temp[i] = a[i]*2;
 			}
 			return temp;
 			});
@@ -69,19 +74,19 @@ public class Wk1_Assignment2 {
 	 */
 	public static FunctionalStr noX() {
 		return (a-> {
-			List<String> temp = new ArrayList<>(a.size());
+			String[] temp = new String[a.length];
 			String str;
-			for(int i = 0; i < a.size(); i++)//loops through the array
+			for(int i = 0; i < a.length; i++)
 			{
 				str ="";
-				for(int j = 0; j <a.get(i).length(); j++)//loops through each string
+				for(int j = 0; j <a[i].length(); j++)
 				{
-					if(a.get(i).charAt(j) != 'x' && a.get(i).charAt(j) != 'X' )//looks for the letter x
+					if(a[i].charAt(j) != 'x' && a[i].charAt(j) != 'X' )
 					{
-						str = str.concat(""+a.get(i).charAt(j));
+						str = str.concat(""+a[i].charAt(j));
 					}
 				}
-				temp.add(str);
+				temp[i] = str;
 			}
 			return temp;
 			});
