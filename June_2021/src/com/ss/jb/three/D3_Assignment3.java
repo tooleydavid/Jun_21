@@ -62,7 +62,7 @@ public class D3_Assignment3 {
 			{
 				for(int i = 0; i < text.length();i++ )
 				{
-					if(text.charAt(i) == countChar || text.charAt(i) == Character.toUpperCase('U'))//checks the lines character by character to try to find a match
+					if(text.charAt(i) == countChar || text.charAt(i) == Character.toUpperCase(countChar))//checks the lines character by character to try to find a match
 					{
 						count++;
 					}
