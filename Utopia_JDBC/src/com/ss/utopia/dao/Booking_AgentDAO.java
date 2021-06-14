@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ss.utopia.domain.Booking;
 import com.ss.utopia.domain.Booking_Agent;
+import com.ss.utopia.domain.User;
 
 public class Booking_AgentDAO extends BaseDAO<Booking_Agent> {
 
@@ -39,6 +41,8 @@ public class Booking_AgentDAO extends BaseDAO<Booking_Agent> {
 		List<Booking_Agent> bookingAgents = new ArrayList<>();
 		while (rs.next()) {
 			Booking_Agent bookingAgent = new Booking_Agent();
+			bookingAgent.setAgent_id(new User());
+			bookingAgent.setBooking_id(new Booking());
 			bookingAgent.getBooking_id().setId(rs.getInt("booking_id"));
 			bookingAgent.getAgent_id().setId(rs.getInt("id"));
 			bookingAgents.add(bookingAgent);

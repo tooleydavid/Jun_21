@@ -124,11 +124,11 @@ public class Main {
 					break;
 				case 5:
 					System.out.println("Travelers");
-					adminTraveler(3);
+					adminTraveler(2);
 					break;
 				case 6:
 					System.out.println("Employees");
-					adminTraveler(1);
+					adminTraveler(3);
 					break;
 				case 7:
 					System.out.println("Cancel");
@@ -136,6 +136,7 @@ public class Main {
 					break;
 				case 8:
 					System.out.println("Quit");
+					main(args);
 					return;
 				}
 
@@ -353,6 +354,7 @@ public class Main {
 
 		case 2:
 			System.out.println("Update");// ----------------------update
+			printList(service.readAirports());
 			System.out.println("Please enter the iata_id you want Updated");
 			id = "";
 			city = "";
@@ -377,6 +379,7 @@ public class Main {
 
 		case 3:
 			System.out.println("Delete");// ----------------DELETE
+			printList(service.readAirports());
 			System.out.println("Please enter the iata_id you want deleted");
 			while (true) {
 				try {
@@ -478,6 +481,7 @@ public class Main {
 
 		case 2:
 			System.out.println("Update");// ----------------------update
+			printUserList(service.readUser(), role_id);
 			System.out.println("Please enter the id you want updated");
 			while (true) {
 				try {
@@ -506,8 +510,6 @@ public class Main {
 
 			System.out.println("Please enter the phone");
 			phone = scan.nextLine();
-
-			System.out.println("Please enter the city");
 
 			user = new User();
 			user.setId(id);
@@ -566,7 +568,7 @@ public class Main {
 		// scan.close();
 	}
 
-	// -------------------------------Ticket
+	// -----------------------------------------------------------------------------Ticket
 	private static void adminTicket() throws SQLException {
 
 		String input = "";
@@ -591,8 +593,9 @@ public class Main {
 
 			while (true)// gets user input
 			{
+				printList(service.readBooking());
 				try {
-					System.out.println("Enter a booking id");
+					System.out.println("Enter a booking id or create a new one");
 					input = scan.nextLine();
 					booking_id = new Booking();
 					booking_id.setId(Integer.parseInt(input));
@@ -631,6 +634,7 @@ public class Main {
 
 		case 2:
 			System.out.println("Update");// ----------------------update
+			printList(service.readPassenger());
 			System.out.println("Please enter the id you want updated");
 			while (true) {
 				try {
@@ -641,9 +645,10 @@ public class Main {
 					System.out.println("Please enter a valid id");
 				}
 			}
+			printList(service.readBooking());
 			while (true) {
 				try {
-					System.out.println("Enter a booking id");
+					System.out.println("Enter a booking id or create a new one");
 					input = scan.nextLine();
 					booking_id = new Booking();
 					booking_id.setId(Integer.parseInt(input));
@@ -683,6 +688,7 @@ public class Main {
 
 		case 3:
 			System.out.println("Delete");// ----------------DELETE
+			printList(service.readPassenger());
 			System.out.println("Please enter the id you want deleted");
 			while (true) {
 				try {
@@ -785,8 +791,8 @@ public class Main {
 				while (true) {
 					try {
 						input = scan.nextLine();
-						id = Integer.parseInt(input);
-						routeList = service.readRoutes(id);
+						int rid = Integer.parseInt(input);
+						routeList = service.readRoutes(rid);
 						if (routeList == null || routeList.size() == 0)
 							throw new Exception();
 						route_id = routeList.get(0);
@@ -927,8 +933,8 @@ public class Main {
 				while (true) {
 					try {
 						input = scan.nextLine();
-						id = Integer.parseInt(input);
-						routeList = service.readRoutes(id);
+						int rid = Integer.parseInt(input);
+						routeList = service.readRoutes(rid);
 						if (routeList == null || routeList.size() == 0)
 							throw new Exception();
 						route_id = routeList.get(0);

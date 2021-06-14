@@ -234,6 +234,22 @@ public class AdminService {
 		}
 		return null;
 	}
+	
+	public List<User> readUser(String username) throws SQLException {
+		Connection conn = null;
+		try {
+			conn = connUtil.getConnection();
+			UserDAO udao = new UserDAO(conn);
+			List<User> user = udao.readUserByUsername(username);
+			// populate the child elements here.
+			return user;
+		} catch (Exception e) {
+			conn.rollback();
+		} finally {
+			conn.close();
+		}
+		return null;
+	}
 
 	public void addUser(User user) throws SQLException {
 		Connection conn = null;

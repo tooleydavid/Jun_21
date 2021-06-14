@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ss.utopia.domain.Booking;
 import com.ss.utopia.domain.Booking_Guest;
 
 public class Booking_GuestDAO extends BaseDAO<Booking_Guest> {
@@ -39,6 +40,7 @@ public class Booking_GuestDAO extends BaseDAO<Booking_Guest> {
 		List<Booking_Guest> booking_guests = new ArrayList<>();
 		while (rs.next()) {
 			Booking_Guest booking_guest = new Booking_Guest();
+			booking_guest.setBooking_id(new Booking());
 			booking_guest.getBooking_id().setId(rs.getInt("booking_id"));
 			booking_guest.setContact_phone(rs.getString("contact_phone"));
 			booking_guest.setContact_email(rs.getString("contact_email"));
