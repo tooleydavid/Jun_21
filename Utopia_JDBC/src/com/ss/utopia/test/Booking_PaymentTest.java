@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
+import com.ss.utopia.domain.Booking;
 import com.ss.utopia.domain.Booking_Payment;
 import com.ss.utopia.service.AdminService;
 
@@ -15,14 +16,19 @@ public class Booking_PaymentTest {
 
 	Booking_Payment btype = new Booking_Payment();
 	AdminService service = new AdminService();
+	Booking booking = new Booking();
 	
 	
 	@Test
 	public void testAirport() throws SQLException
 	{
+		booking.setConfirmation_code("TEST");
+		booking.setId(50);
+		booking.setIs_active(1);
+		service.addBooking(booking);
 		
 		//add
-		btype.setBooking_id(service.readBooking(72).get(0));
+		btype.setBooking_id(booking);
 		btype.setRefunded(0);
 		btype.setStripe_id("TEST");
 		assertEquals(0,service.readBookingPayment("TEST").size());
@@ -37,6 +43,8 @@ public class Booking_PaymentTest {
 		//delete
 		service.deleteBookingPayment(btype);
 		assertEquals(0,service.readBookingPayment("TEST").size());
+		
+		service.deleteBooking(booking);
 				
 	}
 

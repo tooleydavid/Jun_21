@@ -6,7 +6,9 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
+import com.ss.utopia.domain.Booking;
 import com.ss.utopia.domain.Booking_User;
+import com.ss.utopia.domain.User;
 import com.ss.utopia.service.AdminService;
 
 
@@ -15,28 +17,61 @@ public class Booking_UserTest {
 	Booking_User user = new Booking_User();
 	AdminService service = new AdminService();
 	int id = 72;
+	Booking booking = new Booking();
+	User u = new User();
+	User u2 = new User();
 	
 	@Test
 	public void testAirport() throws SQLException
 	{
+		booking.setConfirmation_code("TEST");
+		booking.setId(50);
+		booking.setIs_active(1);
+		service.addBooking(booking);
+		booking.setId(service.readBooking("TEST").get(0).getId());
+		
+		u.setEmail("TEST");
+		u.setFamily_name("TEST");
+		u.setGiven_name("TEST");
+		u.setPassword("TEST");
+		u.setUsername("TEST");
+		u.setRole_id(2);
+		u.setPhone("TEST");
+		service.addUser(u);
+		u.setId(service.readUser("TEST").get(0).getId());
+		
+		u2.setEmail("TEST2");
+		u2.setFamily_name("TEST2");
+		u2.setGiven_name("TEST2");
+		u2.setPassword("TEST2");
+		u2.setUsername("TEST2");
+		u2.setRole_id(2);
+		u2.setPhone("TEST2");
+		service.addUser(u2);
+		u2.setId(service.readUser("TEST2").get(0).getId());
+		
 		
 		//add
-		user.setUser_id(service.readUser(1).get(0));
-		user.setBooking_id(service.readBooking(id).get(0));
+		user.setUser_id(u);
+		user.setBooking_id(booking);
 				
 		
-		assertEquals(0,service.readBooking_UserBooking(id).size());
+		assertEquals(0,service.readBooking_UserBooking(booking.getId()).size());
 		service.addBooking_User(user);
-		assertEquals(1,service.readBooking_UserBooking(id).size());
+		assertEquals(1,service.readBooking_UserBooking(booking.getId()).size());
 				
 		//update
-		user.setUser_id(service.readUser(2).get(0));
+		user.setUser_id(u2);
 		service.updateBooking_User(user);
-		assertEquals(2,service.readBooking_UserBooking(id).get(0).getUser_id().getId());
+		assertEquals(u2.getId(),service.readBooking_UserBooking(booking.getId()).get(0).getUser_id().getId());
 		
 		//delete
 		service.deleteBooking_User(user);
-		assertEquals(0,service.readBooking_UserBooking(id).size());
+		assertEquals(0,service.readBooking_UserBooking(booking.getId()).size());
+		
+		service.deleteUser(u);
+		service.deleteUser(u2);
+		service.deleteBooking(booking);
 				
 	}
 
