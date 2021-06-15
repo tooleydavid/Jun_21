@@ -55,7 +55,7 @@ public class Main {
 			}
 		}
 		User user;
-		if(userRole <0)
+		if(true)
 		{
 			UserDAO userDao = new UserDAO(new ConnectionUtil().getConnection());
 
@@ -333,7 +333,7 @@ public class Main {
 		
 		
 		Booking_User bu = flight2.get(id-1);
-		System.out.println("DELETING "+bu);
+		
 		Booking booking = bu.getBooking_id();
 		booking.setIs_active(0);
 		service.updateBooking(booking);
