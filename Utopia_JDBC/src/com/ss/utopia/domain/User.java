@@ -62,7 +62,6 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", role_id=" + role_id + ", given_name=" + given_name + ", family_name=" + family_name
-				+ ", username=" + username + ", email=" + email + ", password=" + password + ", phone=" + phone + "]";
+		return "User " + id + ", "+given_name + " " + family_name + " \t[username: " + username + ", password: "+password+", email: " + email + ", phone: " + phone + "]";
 	}
 }

@@ -44,7 +44,7 @@ public class Booking_AgentDAO extends BaseDAO<Booking_Agent> {
 			bookingAgent.setAgent_id(new User());
 			bookingAgent.setBooking_id(new Booking());
 			bookingAgent.getBooking_id().setId(rs.getInt("booking_id"));
-			bookingAgent.getAgent_id().setId(rs.getInt("id"));
+			bookingAgent.getAgent_id().setId(rs.getInt("agent_id"));
 			bookingAgents.add(bookingAgent);
 		}
 		return bookingAgents;

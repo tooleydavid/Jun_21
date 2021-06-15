@@ -26,11 +26,7 @@ public class Passenger {
 	public String getGiven_name() {
 		return given_name;
 	}
-	@Override
-	public String toString() {
-		return "Passenger [id=" + id + ", booking_id=" + booking_id.getId() + ", given_name=" + given_name + ", family_name="
-				+ family_name + ", date=" + date + ", gender=" + gender + ", address=" + address + "]";
-	}
+	
 	public void setGiven_name(String given_name) {
 		this.given_name = given_name;
 	}
@@ -58,7 +54,11 @@ public class Passenger {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+	@Override
+	public String toString() {
+		return "Passenger "+ id + ", \t"+ given_name+ " "+ family_name+" with Ticket: \t[" + booking_id.getId() + ", " + booking_id.getConfirmation_code() + "] \t[address: "
+				+ address + ", dob: " + date + ", gender=" + gender + "]";
+	}
 	
 	
 }

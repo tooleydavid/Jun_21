@@ -19,7 +19,7 @@ public class Flight_Bookings {
 	}
 	@Override
 	public String toString() {
-		return "Flight_Bookings [flight_id=" + flight_id.getId() + ", booking_id=" + booking_id.getId() + "]";
+		return "Booking_id=" + booking_id.getId() +" "+flight_id;
 	}
 	
 	

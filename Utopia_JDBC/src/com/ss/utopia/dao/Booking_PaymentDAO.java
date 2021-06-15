@@ -35,6 +35,9 @@ public class Booking_PaymentDAO extends BaseDAO<Booking_Payment> {
 	public List<Booking_Payment> readBooking_PaymentByBooking_Payment_id(int booking_id) throws ClassNotFoundException, SQLException {
 		return read("select * from booking_payment where booking_id = ?", new Object[] {booking_id});
 	}
+	public List<Booking_Payment> readBooking_PaymentByBooking_Payment_id(String id) throws ClassNotFoundException, SQLException {
+		return read("select * from booking_payment where stripe_id = ?", new Object[] {id});
+	}
 
 	public List<Booking_Payment> extractData(ResultSet rs) throws ClassNotFoundException, SQLException {
 		List<Booking_Payment> booking_payments = new ArrayList<>();

@@ -1,10 +1,7 @@
 package com.ss.utopia.domain;
 
 public class Booking {
-	@Override
-	public String toString() {
-		return "Booking [id=" + id + ", is_active=" + is_active + ", confirmation_code=" + confirmation_code + "]";
-	}
+	
 	private int id;
 	private int is_active;
 	private String confirmation_code;
@@ -29,5 +26,12 @@ public class Booking {
 		this.confirmation_code = confirmation_code;
 	}
 	
+	@Override
+	public String toString() {
+		if(is_active == 1)
+			return "Booking: " + id + ", is active with confirmation code: " + confirmation_code;
+		else
+			return "Booking: " + id + ", is inactive with confirmation code: " + confirmation_code;
+	}
 	
 }

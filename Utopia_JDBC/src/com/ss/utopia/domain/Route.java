@@ -26,8 +26,7 @@ public class Route {
 	}
 	@Override
 	public String toString() {
-		return "Route [id=" + id + ", originAirport=" + originAirport.getAirportCode() + ", destinationAirport=" + destinationAirport.getAirportCode()
-				+ "]";
+		return "Route " + id + " From " + originAirport.getCity() + " to " + destinationAirport.getCity();
 	}
 
 }

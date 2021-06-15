@@ -47,8 +47,11 @@ public class Flight {
 	}
 	@Override
 	public String toString() {
-		return "Flight [id=" + id + ", route_id=" + route_id.getId() + ", airplane_id=" + airplane_id.getId() + ", departure_time="
-				+ departure_time + ", reserved_seats=" + reserved_seats + ", seat_price=" + seat_price + "]";
+		return "Flight: "+id+" From "+route_id.getOriginAirport().getCity()+" to "+ route_id.getDestinationAirport().getCity()+" at "+departure_time+ "     \t  ["+reserved_seats+" reserved seats, "+seat_price+" seat price]";
+	}
+	public String print()
+	{
+		return "Flight: "+id+" From "+route_id.getOriginAirport().getCity()+" to "+ route_id.getDestinationAirport().getCity()+" at "+departure_time+ "    \t  ["+reserved_seats+" reserved seats, "+seat_price+" seat price]";
 	}
 	
 	

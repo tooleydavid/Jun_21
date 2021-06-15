@@ -19,7 +19,7 @@ public class Airplane {
 	}
 	@Override
 	public String toString() {
-		return "Airplane [id=" + id + ", type_id=" + type_id.getId() + "]";
+		return "Airplane " + id + " with a max Capacity of "+ type_id.getMax_capacity();
 	}
 	
 	

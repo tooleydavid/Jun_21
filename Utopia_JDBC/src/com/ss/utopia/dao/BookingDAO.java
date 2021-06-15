@@ -24,7 +24,7 @@ public class BookingDAO extends BaseDAO<Booking> {
 	}
 
 	public void deleteBooking(Booking booking) throws ClassNotFoundException, SQLException {
-		save("delete from booking where booking_id = ?", new Object[] { booking.getId() });
+		save("delete from booking where id = ?", new Object[] { booking.getId() });
 	}
 
 	public List<Booking> readAll() throws ClassNotFoundException, SQLException {
