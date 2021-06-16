@@ -55,8 +55,7 @@ public class Main {
 			}
 		}
 		User user;
-		if(true)
-		{
+		if (true) {
 			UserDAO userDao = new UserDAO(new ConnectionUtil().getConnection());
 
 			while (true)// loops until user gives login
@@ -80,8 +79,7 @@ public class Main {
 					// e.printStackTrace();
 				}
 			}
-		}
-		else{
+		} else {
 			UserDAO userDao = new UserDAO(new ConnectionUtil().getConnection());
 			user = userDao.readUserByUsername("Man_of_war").get(0);
 		}
@@ -112,7 +110,7 @@ public class Main {
 						System.out.println("Please enter a number from 1-8");
 					}
 				}
-
+				// ADMIN
 				switch (selection) {
 				case 1:
 					System.out.println("Flights");
@@ -196,6 +194,7 @@ public class Main {
 
 	}
 
+	// Selects whether the user wants to add update delete or read
 	private static int addUpdateDeleteRead() {
 		String input = "";
 		Scanner scan = new Scanner(System.in);
@@ -228,13 +227,15 @@ public class Main {
 		String input = "";
 		int id = 0;
 
-		for (Flight flight : flist) {
+		for (Flight flight : flist) { // Lists all available flights
 			route = flight.getRoute_id();
-		System.out.println(count + 1 + ") " + route.getOriginAirport().getAirportCode() + ", " + route.getOriginAirport().getCity() + " -> "
-					+ route.getDestinationAirport().getAirportCode() + ", " + route.getDestinationAirport().getCity());
+			System.out.println(count + 1 + ") " + route.getOriginAirport().getAirportCode() + ", "
+					+ route.getOriginAirport().getCity() + " -> " + route.getDestinationAirport().getAirportCode()
+					+ ", " + route.getDestinationAirport().getCity());
 			count++;
 		}
 		System.out.println(count + 1 + ") Quit to Previous");
+
 		Scanner scan = new Scanner(System.in);
 		while (true) {// Gets the Flight
 			try {
@@ -245,39 +246,39 @@ public class Main {
 					throw new Exception();
 				break;
 			} catch (Exception e) {
-				System.out.println("Please enter a valid route id");
+				System.out.println("Please enter a valid flight id");
 			}
 		}
 		if (id == count + 1)
 			return;
 		Flight flight = flist.get(id - 1);
-		while(true)
-		{
+		while (true) { //-------------------------allows user to book seat or get flight info
 			System.out.println("Pick the Seat you want to book a ticket for\n");
 			System.out.println("1) View Flight Details\n2)First\n3)Business\n4)Economy\n5)Quit to cancel operation");
 			try {
 				input = scan.nextLine();
 				int choice = Integer.parseInt(input);
-				if(choice == 5)
+				if (choice == 5)//quit
 					return;
-				if(choice == 1)
+				if (choice == 1)//flight info
 					System.out.println(flight);
-				if(choice <  5 && choice > 1)
+				if (choice < 5 && choice > 1)//seat
 					break;
-				if (choice >  5 || choice <= 0)
+				if (choice > 5 || choice <= 0)
 					throw new Exception();
-				} catch (Exception e) {
+			} catch (Exception e) {
 				System.out.println("Please enter a valid route id");
 			}
 		}
-		
-		
+
 		// Creates new booking
-		String conf = "Conf" + (int) (Math.random() * 9999 + 1);
+		int conf_code = (int) (Math.random() * 9999 + 1);
+		String conf = "Conf" + conf_code;
 		Booking booking = new Booking();
 		booking.setIs_active(1);
 		booking.setConfirmation_code(conf);
 
+		
 		service.addBooking(booking);
 		booking.setId(service.readBooking(conf).get(0).getId());
 
@@ -288,6 +289,12 @@ public class Main {
 		fb.setBooking_id(booking);
 
 		service.bookTicket(fb, booking, user);
+		
+		Booking_Payment bp = new Booking_Payment();
+		booking.setId(service.readBooking("Conf"+conf_code).get(0).getId());
+		bp.setBooking_id(booking);
+		bp.setRefunded(0);
+		bp.setStripe_id(""+ (int) (Math.random() * 999999 + 1));
 
 	}
 
@@ -295,50 +302,46 @@ public class Main {
 		System.out.println("Pick the Flight you want to book a ticket for: ");
 		AdminService service = new AdminService();
 		List<Booking_User> blist = service.readBooking_User(user.getId());
-		
+
 		String input = "";
 		int count = 1;
 		int id = 0;
 		List<Flight_Bookings> flight;
 		List<Booking_User> flight2 = new ArrayList<>();
-		
-		for(Booking_User bu:blist)
-		{
+
+		for (Booking_User bu : blist) {//Looks for user's bookings
 			flight = service.readFlightBooking(bu.getBooking_id().getId());
-			if(flight.size() > 0)
-			{
-				System.out.println(count+") "+flight.get(0));
+			if (flight.size() > 0) {
+				System.out.println(count + ") " + flight.get(0));
 				flight2.add(bu);
 				count++;
 			}
 		}
-	
-		
-		System.out.println(count+") Quit");
+
+		System.out.println(count + ") Quit");
 		System.out.println("Which Trip would you like to cancel");
 		Scanner scan = new Scanner(System.in);
 		while (true) {// Gets the trip to remove
 			try {
 				input = scan.nextLine();
 				id = Integer.parseInt(input);
-				if(id == count)
+				if (id == count)//quit
 					return;
-				if (id > count || id <= 0)
+				if (id > count || id <= 0)//selection
 					throw new Exception();
 				break;
 			} catch (Exception e) {
-				System.out.println("Please enter a valid route id");
+				System.out.println("Please enter a valid id");
 			}
 		}
-		
-		
-		Booking_User bu = flight2.get(id-1);
-		
+
+		Booking_User bu = flight2.get(id - 1);
+		//deactivates the booking
 		Booking booking = bu.getBooking_id();
 		booking.setIs_active(0);
 		service.updateBooking(booking);
 
-		List<Booking_Payment> plist = service.readBookingPayment(booking.getId());
+		List<Booking_Payment> plist = service.readBookingPayment(booking.getId());//checks if the user paid
 		if (plist.size() > 0) {
 			Booking_Payment bp = plist.get(0);
 			bp.setRefunded(1);
@@ -1157,7 +1160,7 @@ public class Main {
 					if (bookingList == null || bookingList.size() < 1)
 						throw new Exception();
 					booking_id = bookingList.get(0);
-					booking_id.setIs_active(1);//makes booking active
+					booking_id.setIs_active(1);// makes booking active
 					service.updateBooking(booking_id);
 					break;
 				} catch (Exception e) {
@@ -1274,12 +1277,13 @@ public class Main {
 			if (id != 0)// read by id
 				printList(service.readFlightBooking(id));
 			else
-				printList (service.readFlightBooking());// read all
-			
+				printList(service.readFlightBooking());// read all
+
 			break;
 		}
 		// scan.close();
 	}
+
 //------------------------------------------------------------------CANCEL
 	private static void adminCancel() throws SQLException {
 		String input = "";
@@ -1328,19 +1332,17 @@ public class Main {
 			System.out.println(x);
 		}
 	}
-	
+
 	private static void printFlight(List<Flight> list) {
-		for(Flight x:list)
-		{
+		for (Flight x : list) {
 			System.out.println(x.print());
 		}
-			
+
 	}
-	private static void printActive(List<Booking> list)
-	{
-		for(Booking x:list)
-		{
-			if(x.getIs_active()==1)
+
+	private static void printActive(List<Booking> list) {
+		for (Booking x : list) {
+			if (x.getIs_active() == 1)
 				System.out.println(x);
 		}
 	}
